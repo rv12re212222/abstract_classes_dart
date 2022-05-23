@@ -8,21 +8,38 @@ extension Log on Object{
 
 }
 
-abstract class CanRun{
 
+enum Type {
+  cat,
+  dog
+}
+abstract class CanRun{
+  final Type type;
+  CanRun(this.type);
   @mustCallSuper
   void run(){
     "this is super".log();
   }
-
 }
 
 class Cat extends CanRun{
+  Cat() : super(Type.cat);
 
   @override
   void run(){
     super.run();
-    "this is the subclass".log();
+    "this is the Cat".log();
+  }
+}
+
+class Dog extends CanRun{
+
+  Dog() : super(Type.dog);
+
+  @override
+  void run(){
+    super.run();
+    "this is the Dog".log();
 
   }
 
@@ -31,8 +48,10 @@ class Cat extends CanRun{
 
 void testIt(){
   final cat = Cat();
+  final dog = Dog();
 
-  cat.run();
+  cat.type.log();
+  dog.type.log();
 }
 
 void main() {
@@ -83,11 +102,7 @@ class HomePage extends StatelessWidget {
 }
 
 class BreadCrumbProvider extends ChangeNotifier{
-
   final List<BreadCrumb> _items = [];
 
   UnmodifiableListView<BreadCrumb> get item => UnmodifiableListView(_items);
-
-
-
 }
