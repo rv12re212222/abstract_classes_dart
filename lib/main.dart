@@ -9,49 +9,31 @@ extension Log on Object{
 }
 
 
-enum Type {
-  cat,
-  dog
-}
 abstract class CanRun{
-  final Type type;
-  CanRun(this.type);
-  @mustCallSuper
   void run(){
-    "this is super".log();
+    "Running...".log();
   }
 }
 
-class Cat extends CanRun{
-  Cat() : super(Type.cat);
+abstract class CanWalk{
 
-  @override
-  void run(){
-    super.run();
-    "this is the Cat".log();
-  }
-}
-
-class Dog extends CanRun{
-
-  Dog() : super(Type.dog);
-
-  @override
-  void run(){
-    super.run();
-    "this is the Dog".log();
-
+  void walk(){
+    "1walking...".log();
   }
 
 }
+
+class Cat with CanRun,CanWalk{
+
+}
+
 
 
 void testIt(){
   final cat = Cat();
-  final dog = Dog();
 
-  cat.type.log();
-  dog.type.log();
+  cat..run()..walk();
+
 }
 
 void main() {
